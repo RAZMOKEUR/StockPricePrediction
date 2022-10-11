@@ -1,0 +1,22 @@
+- MCD 
+- choix model (arima) (workflow)
+- description architecture application
+-
+
+
+probèlemes recontrés :
+- Modélisaiton de données 
+- ARIMA prend que ndim = 1
+- saut de dates + valeurs manquantes
+
+stack overflow : 
+
+-https://stackoverflow.com/questions/62694035/how-to-add-missing-dates-in-pandas
+-https://stackoverflow.com/questions/45320928/pandas-fill-missing-values-using-last-available
+
+
+ressources pour le projet : 
+
+-https://site.financialmodelingprep.com/developer/
+-https://towardsdatascience.com/interpreting-acf-and-pacf-plots-for-time-series-forecasting-af0d6db4061c
+-https://towardsdatascience.com/finding-seasonal-trends-in-time-series-data-with-python-ce10c37aa861
