@@ -8,6 +8,7 @@ probèlemes recontrés :
 - Modélisaiton de données 
 - ARIMA prend que ndim = 1
 - saut de dates + valeurs manquantes
+- lecture des données par bilioteques javascript 
 
 stack overflow : 
 

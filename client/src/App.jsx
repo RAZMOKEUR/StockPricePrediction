@@ -1,34 +1,26 @@
-import './App.css';
-import { useState } from "react";
-
+import Home from './components/Home'
+import Page_Results from './components/Page_Results'
+import Stock_Page from './components/Stock_Page';
+import {
+  BrowserRouter,
+  Routes,
+  Route
+} from "react-router-dom";
 function App() {
 
-  const [nasdaqPrice, setNasdaqPrice] = useState(1)
 
   return (
-    <div className="App">
 
-      <section className='head'>
-        <h1>NASDAQ Stock Price Prediction</h1>
-      </section>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" exact index element={<Home />}></Route>
+        <Route path="/search/:ticker" exact index element={<Page_Results />}></Route>
+        <Route path="/:ticker" exact index element={<Stock_Page />}></Route>
 
-      <section className='body'>
+      </Routes>
 
-        <h3>Nasdaq Price Actual price : <span>{nasdaqPrice}</span> </h3>
+    </BrowserRouter>
 
-        <form action="">
-          <h3>Search Form</h3>
-          <div id='searchbar'>
-            <input type="search" name="stock" id="search" />
-            <button><img src="src\assets\search.png" alt="" /></button>
-          </div>
-
-
-
-        </form>
-      </section>
-
-    </div>
   )
 }
 
