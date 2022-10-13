@@ -11,17 +11,20 @@ class arima_model():
 
     user = 'saber'
     pwd = '7x%j%8%VpejLCN'
-    db_name = "spp"
-    url = "mysql+pymysql://{user}:{pwd}@127.0.0.1:3306/{db_name}".format(
+    db_name = "SPP"
+    url_price = "mysql+pymysql://{user}:{pwd}@127.0.0.1:3306/{db_name}".format(
         user=user, pwd=pwd, db_name=db_name)
-    con = sqlalchemy.create_engine(url)
+    con = sqlalchemy.create_engine(url_price)
+    url_prediction = "mysql+pymysql://{user}:{pwd}@127.0.0.1:3306/{db_name}".format(
+        user=user, pwd=pwd, db_name="SP2")
+    con_pred = sqlalchemy.create_engine(url_prediction)
 
     # historique des prix
 
     def priceHistory(ticker):
-        ticker = ticker.lower()
+        ticker = ticker.upper()
         df = pd.read_sql(ticker, arima_model.con, index_col='date')
-        return df
+        return df.tail(7)[0:7]
 
     # avoir la prediction
 
@@ -30,11 +33,13 @@ class arima_model():
         # recup le dataframe
 
         def readDfSql(ticker):
-            ticker = ticker.lower()
-            df = pd.read_sql(ticker, arima_model.con, index_col='date')
+            ticker = ticker.upper()
+            df = pd.read_sql(ticker, arima_model.con_pred, index_col='date')
             return df
 
         df = readDfSql(ticker)
+
+        df = df['2017':]
 
         # trouver les paramètres p,d,q
 

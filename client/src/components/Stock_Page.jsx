@@ -9,7 +9,7 @@ const Stock_Page = () => {
 
     const { ticker } = useParams();
     const [priceHistory, setPriceHistory] = useState(1)
-    // const [pricePrediction, setPricePrediction] = useState(null)
+    const [pricePrediction, setPricePrediction] = useState(null)
 
     const getPriceHistory = async () => {
         const res = await axios.get(`http://127.0.0.1:8000/prices/${ticker}`).catch((error) => {
@@ -20,14 +20,21 @@ const Stock_Page = () => {
 
     }
 
-    useEffect(() => {
-        getPriceHistory()
+    const getPrediction = async () => {
+        console.log('prediction en cours ...');
+        const res = await axios.get(`http://127.0.0.1:8000/predict/${ticker}`).catch((error) => {
+            console.log(error);
+        });
+        console.log(res.data);
+        setPricePrediction(res.data)
+        console.log('done');
+    }
 
-    }, [])
 
-    const labels = []
-    const data = []
+    // useEffect(() => {
+    //     getPriceHistory()
 
+    // }, [])
 
 
     return (
@@ -35,6 +42,7 @@ const Stock_Page = () => {
         <div>
             <h1>Stock Page for {ticker}</h1>
             <button onClick={getPriceHistory}>get price </button>
+            <button onClick={getPrediction}>get prediction</button>
 
             {/* <h2> price : {priceHistory}</h2>
             <button onClick={getPrediction}>get prediction </button>
